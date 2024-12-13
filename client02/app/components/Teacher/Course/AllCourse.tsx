@@ -144,7 +144,7 @@ const AllCourse = () => {
   sx={{
     "& .MuiDataGrid-columnHeaders": {
       backgroundColor: "#3f51b5", // Màu nền header
-      color: "red", // Màu chữ header
+      color: "green", // Màu chữ header
       fontSize: "16px",
       fontWeight: "bold",
     },
