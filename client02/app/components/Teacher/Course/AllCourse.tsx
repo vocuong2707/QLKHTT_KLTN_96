@@ -138,29 +138,35 @@ const AllCourse = () => {
               backgroundColor: theme === "dark" ? "#1F2A40" : "#F8F9FF",
             }}
           >
-            <DataGrid rows={rows} columns={columns}
-               sx={{
-                "& .MuiDataGrid-columnHeaders": {
-                  backgroundColor: "#3f51b5", // Màu nền header
-                  color: "red", // Màu chữ header
-                  fontSize: "16px",
-                  fontWeight: "bold",
-                },
-                "& .MuiDataGrid-footerContainer": {
-                  backgroundColor: "#3f51b5", // Màu nền footer
-                  color: "#ffffff", // Màu chữ footer
-                },
-                "& .MuiDataGrid-root": {
-                  border: "none", // Loại bỏ đường viền của bảng
-                },
-                "& .MuiDataGrid-row": {
-                  backgroundColor: theme === "dark" ? "#2e3b55" : "#ffffff", // Màu nền hàng
-                  "&:hover": {
-                    backgroundColor: theme === "dark" ? "#3a4a6b" : "#f1f1f1", // Màu hover
-                  },
-                },
-              }}
-            />
+           <DataGrid
+  rows={rows}
+  columns={columns}
+  sx={{
+    "& .MuiDataGrid-columnHeaders": {
+      backgroundColor: "#3f51b5", // Màu nền header
+      color: "red", // Màu chữ header
+      fontSize: "16px",
+      fontWeight: "bold",
+    },
+    "& .MuiDataGrid-footerContainer": {
+      backgroundColor: "#3f51b5", // Màu nền footer
+      color: "#ffffff", // Màu chữ footer
+    },
+    "& .MuiDataGrid-root": {
+      border: "none", // Loại bỏ đường viền của bảng
+    },
+    "& .MuiDataGrid-row": {
+      backgroundColor: theme === "dark" ? "#2e3b55" : "#ffffff", // Màu nền hàng
+      "&:hover": {
+        backgroundColor: theme === "dark" ? "#3a4a6b" : "#f1f1f1", // Màu hover
+      },
+    },
+    "& .MuiDataGrid-cell": {
+      color: "red", // Font chữ màu đỏ cho toàn bộ ô trong bảng
+    },
+  }}
+/>
+
           </div>
           {open && (
             <Modal open={open} onClose={() => setOpen(!open)}>
