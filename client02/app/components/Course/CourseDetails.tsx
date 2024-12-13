@@ -166,7 +166,7 @@ const CourseDetails = ({ data, clientSecret, stripePromise, setRoute, setOpen: o
                       <div className="pl-4 flex flex-col w-full">
                         <div className="flex items-center mb-2">
                           <h5 className="text-[20px]">{i.user.name}</h5>
-                          {i.user.role === "admin" && (
+                          {i.user.role === "Admin" && (
                             <VscVerifiedFilled className="text-[#50c750] ml-2 text-[20px]" />
                           )}
                         </div>

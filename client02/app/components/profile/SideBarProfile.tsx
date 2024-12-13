@@ -65,7 +65,7 @@ const SideBarProfile:FC<Props> = ({user, active,avatar,setActive,logOutHandler})
 
            {
             user.role === "Admin" && (
-                <Link href={"/admin"}
+                <Link href={"/Admin"}
                  className={`w-full flex items-center px-3 py-4 cursor-pointer
                     ${active === 6 ? "dark:bg-slate-800 bg-white " : "bg-transparent" } `}
                     onClick={() => setActive(6)}
@@ -82,7 +82,7 @@ const SideBarProfile:FC<Props> = ({user, active,avatar,setActive,logOutHandler})
            }
              {
             user.role === "Teacher" && (
-                <Link href={"/teacher"}
+                <Link href={"/Teacher"}
                  className={`w-full flex items-center px-3 py-4 cursor-pointer
                     ${active === 6 ? "dark:bg-slate-800 bg-white " : "bg-transparent" } `}
                     onClick={() => setActive(4)}

@@ -697,7 +697,7 @@ const CourseContentMedia = ({
             </div>
 
             {/* Thêm trả lời cho admin */}
-            {user.role === "admin" && (
+            {user.role === "Admin" && (
               <span
                 className={`${Style.Label} cursor-pointer mt-2 block`}
                 onClick={() => {
@@ -871,7 +871,7 @@ const CommentItem = ({
                 <div className="pl-2">
                   <div className="flex items-center">
                     <h5 className="text-[20px]">{item?.user.name}</h5>
-                    {item.user.role === "admin" && (
+                    {item.user.role === "Admin" && (
                       <VscVerifiedFilled className="text-[#50c750] ml-2 text-[20px]" />
                     )}
                   </div>

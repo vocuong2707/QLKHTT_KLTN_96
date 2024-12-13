@@ -106,7 +106,7 @@ const AllTeam: FC<Props> = ({ isTeam }) => {
 
   // Tính toán lại rows dựa trên dữ liệu đã lọc
   if (isTeam) {
-    const newData = data && data.users.filter((item: any) => item.role === "admin");
+    const newData = data && data.users.filter((item: any) => item.role === "Admin");
     if (newData) {
       newData.forEach((item: any) => {
         rows.push({
