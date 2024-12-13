@@ -1,3 +1,5 @@
+'use client';
+
 import Ratings from "@/app/Utils/Ratings";
 import Image from "next/image";
 import Link from "next/link";
