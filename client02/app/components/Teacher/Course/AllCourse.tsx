@@ -36,7 +36,7 @@ const AllCourse = () => {
         .map((item: any) => ({
           id: item._id,
           title: item.name,
-          purchased: item.purchased,
+          registeredUsers: item.registeredUsers,
           ratings: item.ratings,
           created_at: format(item.createdAt),
         }));
@@ -47,7 +47,7 @@ const AllCourse = () => {
   const columns = [
     { field: "title", headerName: "Course Title", flex: 1 },
     { field: "ratings", headerName: "Ratings", flex: 0.5 },
-    { field: "purchased", headerName: "Purchased", flex: 0.5 },
+    { field: "registeredUsers", headerName: "RegisteredUsers", flex: 0.5 },
     { field: "created_at", headerName: "Created At", flex: 0.5 },
     {
       field: " ",

@@ -18,8 +18,8 @@ const Page = ({params}: Props) => {
 
     useEffect(() => {
         if(data){
-            const isPurchased = data?.user?.courses.find((item:any) => item._id === id);
-            if(!isPurchased){
+            const registeredUsers = data?.user?.courses.find((item:any) => item._id === id);
+            if(!registeredUsers){
                 redirect("/");
             }
             if(error){

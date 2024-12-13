@@ -98,7 +98,7 @@ const AllUsers: FC = () => {
         );
       },
     },
-    { field: "courses", headerName: "Purchased Courses", flex: 0.8 },
+    { field: "courses", headerName: "registeredUsers", flex: 0.8 },
     { field: "created_at", headerName: "Created At", flex: 0.7 },
     {
       field: "delete",

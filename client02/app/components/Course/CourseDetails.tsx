@@ -26,7 +26,7 @@ const CourseDetails = ({ data, clientSecret, stripePromise, setRoute, setOpen: o
   const { data: userData } = useLoadUserQuery(undefined, {});
   const [user, setUser] = useState<any>();
   const [open, setOpen] = useState(false);
-  const [isPurchased, setIsPurchased] = useState<boolean>(false); // Track purchase status
+  const [registeredUsers, setRegisteredUsers] = useState<boolean>(false); // Track purchase status
   const [loading, setLoading] = useState<boolean>(false); // Track loading state
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const CourseDetails = ({ data, clientSecret, stripePromise, setRoute, setOpen: o
 
   useEffect(() => {
     if (user && user?.courses?.find((item: any) => item._id === data._id)) {
-      setIsPurchased(true); // Check if the course is purchased
+      setRegisteredUsers(true); // Check if the course is purchased
     }
   }, [user, data]);
 
@@ -60,7 +60,9 @@ const CourseDetails = ({ data, clientSecret, stripePromise, setRoute, setOpen: o
 
   const handlePaymentSuccess = () => {
     // Reload the Page or fetch updated data after payment success
-    setIsPurchased(true); // Mark the course as purchased
+    setRegisteredUsers(true); // Mark the course as purchased
+    setOpen(false);
+
   };
 
   return (
@@ -76,7 +78,7 @@ const CourseDetails = ({ data, clientSecret, stripePromise, setRoute, setOpen: o
                 <Ratings rating={data.ratings} />
                 <h5 className="text-black dark:text-white">{data.reviews?.length} đánh giá</h5>
               </div>
-              <h5 className="text-black dark:text-white">{data.purchased} Học Viên</h5>
+              <h5 className="text-black dark:text-white">{data.registeredUsers} Học Viên</h5>
             </div>
             <br />
             <h1 className="text-[25px] font-Poppins font-[600] text-black dark:text-white">
@@ -192,7 +194,7 @@ const CourseDetails = ({ data, clientSecret, stripePromise, setRoute, setOpen: o
                 </h4>
               </div>
               <div className="flex items-center">
-                {isPurchased ? (
+                {registeredUsers ? (
                   <Link
                     className={`${Style.button} !w-[180px] my-3 font-Poppins cursor-pointer !bg-[crimson]`}
                     href={`/course-access/${data._id}`}
