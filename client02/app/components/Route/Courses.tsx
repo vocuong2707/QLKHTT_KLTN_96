@@ -7,7 +7,7 @@ type Props = {
 };
 
 const Course = ({ user }: Props) => {
-  const { data, isLoading } = useGetAllCoursesQuery({});
+  const { data, isLoading } = useGetAllCoursesQuery({}) || undefined;
   const [recommendedCourses, setRecommendedCourses] = useState<any[]>([]);
 
   useEffect(() => {
