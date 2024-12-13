@@ -101,10 +101,19 @@ export const courseApi = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
     }),
+    getCoursesByIdUser: builder.query({
+      query: (userId) => ({
+        url: `get-courses-by-id/${userId}`,
+        method: "GET", 
+        credentials: "include" as const,
+      }),
+    }),
+    
+   
   }),
 
 });
 
 export const { useCreateCourseMutation, useGetAllCoursesQuery, useDeleteCoursesMutation, useEditCoursesMutation,
   useGetUserAllCoursesQuery, useGetCoursesDetailsQuery, useGetCoursesContentQuery, useAddNewQuestionMutation,
-  useAddAnswerInQuestionMutation, useAddReviewInCourseMutation, useAddReplyInReviewMutation,useAddUserToCourseMutation } = courseApi;
+  useAddAnswerInQuestionMutation, useAddReviewInCourseMutation, useAddReplyInReviewMutation,useAddUserToCourseMutation,useGetCoursesByIdUserQuery } = courseApi;

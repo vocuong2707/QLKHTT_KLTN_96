@@ -25,16 +25,16 @@ app.use(cookieParser());
 
 
 app.use(cors({
-    origin: 'http://localhost:3000', // Cho phép frontend
+    origin: 'http://localhost:3000/', // Cho phép frontend
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Các phương thức HTTP được phép
     credentials: true, // Gửi cookie hoặc thông tin xác thực
 }));
-
+// http://localhost:3000/
 // routes
 
 app.use("/api/v1",userRouter,orderRouter,courseRouter,notificationRouter,analyticsRouter,layoutRouter,questionRouter);
 app.options('*', (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000/");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     res.setHeader("Access-Control-Allow-Credentials", "true");

@@ -64,7 +64,7 @@ const SideBarProfile:FC<Props> = ({user, active,avatar,setActive,logOutHandler})
             </div>
 
            {
-            user.role === "admin" && (
+            user.role === "Admin" && (
                 <Link href={"/admin"}
                  className={`w-full flex items-center px-3 py-4 cursor-pointer
                     ${active === 6 ? "dark:bg-slate-800 bg-white " : "bg-transparent" } `}

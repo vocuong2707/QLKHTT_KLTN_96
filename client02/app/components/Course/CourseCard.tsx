@@ -36,7 +36,7 @@ const CourseCard: FC<Props> = ({ item, isProfile }) => {
         <div className="w-full flex items-center justify-between pt-2">
           <Ratings rating={item?.ratings} />
           <h5 className={`text-black dark:text-white ${isProfile && "hidden md:inline"}`}>
-            {item.purchased} Học viên
+            {item.registeredUsers.length} Học viên
           </h5>
         </div>
 

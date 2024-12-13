@@ -19,7 +19,7 @@ import {
 import toast from "react-hot-toast";
 import { useLoadUserQuery } from "@/redux/features/api/apiSilce";
 import Loader from "./Loader/Loader";
-import Logo from "../../public/asstes/logo.jpg";
+import Logo from "../../public/asstes/logo1.jpg";
 
 type Props = {
   open: boolean;
@@ -104,8 +104,8 @@ const Header: FC<Props> = ({ activeItem, setOpen, setRoute, open, route }) => {
                 >
                   <Image
                     src={Logo}
-                    width={40}
-                    height={20}
+                    width={70}
+                    height={70}
                     alt="Logo"
                     className="rounded-xl mr-3" // Thêm một chút khoảng cách giữa logo và chữ
                   />
@@ -124,11 +124,8 @@ const Header: FC<Props> = ({ activeItem, setOpen, setRoute, open, route }) => {
                   {userData ? (
                     <Link
                       href={
-                        userData.user.role === "admin"
-                          ? "/admin"
-                          : userData.user.role === "Teacher"
-                          ? "/teacher"
-                          : "/profile"
+                        
+                           "/profile"
                       }
                     >
                       <Image
@@ -171,11 +168,8 @@ const Header: FC<Props> = ({ activeItem, setOpen, setRoute, open, route }) => {
                   {userData ? (
                     <Link
                       href={
-                        userData.user.role === "admin"
-                          ? "/admin"
-                          : userData.user.role === "teacher"
-                          ? "/teacher"
-                          : "/profile"
+                        
+                          "/profile"
                       }
                     >
                       <Image

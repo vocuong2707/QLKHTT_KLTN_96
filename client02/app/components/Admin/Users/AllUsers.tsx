@@ -5,40 +5,47 @@ import { AiOutlineDelete, AiOutlineMail } from "react-icons/ai";
 import { useTheme } from "next-themes";
 import Loader from "../../Loader/Loader";
 import { format } from "timeago.js";
-import { useDeleteUsersMutation, useGetAllUsersQuery, useUpdateUsersRoleMutation } from "@/redux/features/user/userApi";
+import { useDeleteUsersMutation, useGetAllUsersAdminQuery, useUpdateUsersRoleMutation } from "@/redux/features/user/userApi";
+import { useLoadUserQuery } from "@/redux/features/api/apiSilce"; 
 import { Style } from "@/app/style/stylelogin";
 import toast from "react-hot-toast";
 
 const AllUsers: FC = () => {
   const { theme } = useTheme();
-  const { isLoading, data } = useGetAllUsersQuery({}, { refetchOnMountOrArgChange: true });
+  const { isLoading, data } = useGetAllUsersAdminQuery({}, { refetchOnMountOrArgChange: true });
   const [userId, setUserID] = useState("");
   const [open, setOpen] = useState(false);
   const [deleteUser] = useDeleteUsersMutation();
   const [updateUserRole] = useUpdateUsersRoleMutation();
   const [rows, setRows] = useState<any[]>([]);
   const [editRole, setEditRole] = useState<{ id: string; role: string } | any>(null);
-
+  const  {data:user} = useLoadUserQuery({},{ refetchOnMountOrArgChange: true })
   useEffect(() => {
+    console.log("usseferer: " , data);
+    console.log('====================================');
+    console.log("user: " , user.user);
+    console.log('====================================');
     if (data?.users && Array.isArray(data.users)) {
-      const newRows = data.users.map((item: any) => ({
-        id: item._id,
-        name: item.name,
-        email: item.email,
-        role: item.role,
-        courses: item.courses.length,
-        created_at: format(item.createdAt),
-      }));
+      const newRows = data.users
+      .filter((item: any) => item._id !== user.user._id) // Lọc các phần tử không thỏa điều kiện
+    .map((item: any) => ({
+    id: item._id,
+    name: item.name,
+    email: item.email,
+    role: item.role,
+    courses: item.courses.length,
+    created_at: format(item.createdAt),
+  }));
       setRows(newRows);
     } else {
       console.error("Dữ liệu users không tồn tại hoặc không phải là mảng");
     }
+    console.log("row: " , rows);
+    
   }, [data]);
 
   const handleRoleUpdate = async () => {
-    console.log('====================================');
-    console.log("Edit Role: " , editRole);
-    console.log('====================================');
+   
     if (editRole) {
       try {
         await updateUserRole({ id: editRole.id, role: editRole.role });
@@ -107,7 +114,7 @@ const AllUsers: FC = () => {
               setUserID(params.row.id);
             }}
           >
-            <AiOutlineDelete className="dark:text-white text-black" />
+            <AiOutlineDelete className="dark:text-red text-black" />
           </Button>
         );
       },
@@ -177,7 +184,7 @@ const AllUsers: FC = () => {
               },
             }}
           >
-            <DataGrid rows={rows} columns={columns} />
+            <DataGrid rows={rows} columns={columns}  />
           </Box>
 
           {open && (

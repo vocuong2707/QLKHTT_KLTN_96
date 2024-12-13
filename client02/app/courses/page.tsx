@@ -136,6 +136,11 @@ const Page: React.FC = () => {
               </div>
             </Suspense>
           </div>
+          <br />
+          <br />
+          <br />
+          <br />
+
           <Footer />
         </>
       )}

@@ -24,7 +24,7 @@ const origin = process.env.ORIGIN;
 // cookie parser
 exports.app.use((0, cookie_parser_1.default)());
 exports.app.use((0, cors_1.default)({
-    origin: 'http://localhost:3000', // Cho phép frontend
+    origin: 'http://localhost:3000/', // Cho phép frontend
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Các phương thức HTTP được phép
     credentials: true, // Gửi cookie hoặc thông tin xác thực
 }));
@@ -38,7 +38,7 @@ const limiter = (0, express_rate_limit_1.rateLimit)({
 // routes
 exports.app.use("/api/v1", user_route_1.default, order_route_1.default, course_route_1.default, notification_route_1.default, analytics_route_1.default, layout_route_1.default, question_route_1.default);
 exports.app.options('*', (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000/");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     res.setHeader("Access-Control-Allow-Credentials", "true");
@@ -47,7 +47,7 @@ exports.app.options('*', (req, res) => {
 // socketio
 const io = require("socket.io")(8080, {
     cors: {
-        origin: "http://localhost:3000", // Địa chỉ front-end
+        origin: "http://localhost:3000/", // Địa chỉ front-end
         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     },
 });
@@ -57,6 +57,9 @@ exports.app.get("/KHTT", (req, res, next) => {
         success: true,
         mesage: "API is working"
     });
+    console.log('====================================');
+    console.log("Server connectio");
+    console.log('====================================');
 });
 exports.app.all("*", (req, res, next) => {
     const err = new Error(`Route ${req.originalUrl} not found`);

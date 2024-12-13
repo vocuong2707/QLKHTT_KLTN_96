@@ -109,7 +109,7 @@ const CourseDetails = ({ data, clientSecret, stripePromise, setRoute, setOpen: o
             <br />
             <div>
               <h1 className="text-[25px] font-Poppins font-[600] text-black dark:text-white">Tổng quan khóa học</h1>
-              <CourseContainetList data={data?.courseData} isDemo={true} />
+              <CourseContainetList data={(data?.courseData) as any} isDemo={true} />
             </div>
             <br />
             <br />

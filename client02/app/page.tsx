@@ -33,8 +33,6 @@ const Page: FC<Props> = (props) => {
 
   // Kiểm tra điều kiện để hiển thị modal
   useEffect(() => {
-    
-    
     if (userData && userData.user) { // Kiểm tra userData.user tồn tại
       if (userData.user.role === "user" && userData.user.isTest === false && count === 0) {
         setOpenTestModal(true);

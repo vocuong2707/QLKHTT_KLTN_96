@@ -6,8 +6,9 @@ import { signOut } from "next-auth/react";
 import ProfileInfo from "./ProfileInfo";
 import ChangePassword from "./ChangePassword";
 import CourseCard from "../Course/CourseCard";
-import { useGetAllCoursesQuery, useGetUserAllCoursesQuery } from "@/redux/features/courses/coursesApi";
+import { useGetAllCoursesQuery, useGetUserAllCoursesQuery,useGetCoursesByIdUserQuery } from "@/redux/features/courses/coursesApi";
 import { useLoadUserQuery, useRefreshTokenQuery } from '@/redux/features/api/apiSilce';
+import { useSelector } from "react-redux";
 
 type Props = {
   user: any;
@@ -18,13 +19,17 @@ const Profile: FC<Props> = ({ user }) => {
   const [avatar, setAvatar] = useState(null);
   const [logout, setLogout] = useState(false);
   const [courses, setCourses] = useState([]);
-  const { data, refetch,isLoading } = useGetUserAllCoursesQuery(undefined, {});
-  const {data:userReload , refetch:refetchUser } = useLoadUserQuery({});
+  // const {data:userReload , refetch:refetchUser } = useLoadUserQuery({});
+  const userId = useSelector((state : any) => state.auth.user?._id); // Lấy userId từ Redux store
+  console.log('====================================');
+  console.log("userId", userId);
+  console.log('====================================');
+  const { data, isLoading, isError } = useGetCoursesByIdUserQuery(userId, {
+    skip: !userId, // Bỏ qua query nếu userId chưa tồn tại
+  });
 
-  if(!user === userReload) {
-    refetchUser();
-    user = userReload;
-  }
+  console.log("data" , data)
+  
   const {} = useLogOutQuery(undefined, {
     skip: !logout ? true : false,
   });
@@ -51,17 +56,9 @@ const Profile: FC<Props> = ({ user }) => {
   }
 
   useEffect(() => {
-    refetch();
-    if (data) {
-      const filteredCourses = user.courses
-        .map((userCourse: any) =>
-          data.courses.find((course: any) => course._id === userCourse._id)
-        )
-        .filter((course: any) => course !== undefined);
-      setCourses(filteredCourses);
-      
-     
-    }
+    console.log('====================================');
+    console.log("data: ",data);
+    console.log('====================================');
   }, [data]);
 
   return (
@@ -95,16 +92,16 @@ const Profile: FC<Props> = ({ user }) => {
                              lg:grid-cols-2 lg:gap-[25px] xl:grid-cols-3 xl:gap-[35px] "
           >
             {courses &&
-              courses.map((item: any, index: number) => (
+              data.registeredCourses.map((item: any, index: number) => (
                 
                 <CourseCard
-                  item={item._doc}
+                  item={item}
                   key={index}
                   isProfile={true}
                 />
               ))}
           </div>
-          {courses.length === 0 && (
+          {data.registeredCourses.length === 0 && (
             <h1 className="text-center text-[18px] font-Poppins">
               Bạn không có bất kỳ khóa học đã mua nào
             </h1>

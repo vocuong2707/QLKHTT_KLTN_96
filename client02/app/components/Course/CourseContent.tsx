@@ -53,7 +53,7 @@ const CourseContent = ({ id, user }: Props) => {
             </div>
             <div className="hidden md:block col-span-2"> {/* CourseContainerList chiếm 2 phần */}
                 <CourseContainerList
-                    setActiveVideo={setAciveVideo}
+                    setActiveVideo ={setAciveVideo}
                     data={data}
                     activeVideo={activeVideo}
                 />

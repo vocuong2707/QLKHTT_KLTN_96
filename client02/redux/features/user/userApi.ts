@@ -29,6 +29,14 @@ export const userApi = apiSlice.injectEndpoints({
                 credentials: "include" as const,
             }),
         }),
+        getAllUsersAdmin: builder.query({
+          query: () => ({  // Truyền trực tiếp data thay vì { data }
+            url: "get-users-admin",
+            method: "GET",
+            credentials: "include" as const,
+          }),
+        })
+        ,
         getAllUsers: builder.query({
             query: () => ({  // Truyền trực tiếp data thay vì { data }
               url: "get-users",
@@ -73,4 +81,4 @@ export const userApi = apiSlice.injectEndpoints({
 });
 
 export const {useUpdateAvatarMutation, useEditProfileMutation, 
-    useUpdatePasswordMutation,useGetAllUsersQuery,useUpdateUsersRoleMutation,useDeleteUsersMutation,useGetAllUserByCourseQuery,useGetUsersByIdsMutation } = userApi;
+    useUpdatePasswordMutation,useGetAllUsersQuery,useUpdateUsersRoleMutation,useDeleteUsersMutation,useGetAllUserByCourseQuery,useGetUsersByIdsMutation,useGetAllUsersAdminQuery } = userApi;
