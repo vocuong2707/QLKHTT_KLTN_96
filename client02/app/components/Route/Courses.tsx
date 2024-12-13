@@ -11,6 +11,8 @@ const Course = ({ user }: Props) => {
   const [recommendedCourses, setRecommendedCourses] = useState<any[]>([]);
 
   useEffect(() => {
+    console.log("Data: " , data);
+    
     if (data?.courses && user) {
       // Lọc các khóa học chưa đăng ký và cùng level
       const courseIdUser = user.courses;

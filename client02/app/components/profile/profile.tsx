@@ -21,14 +21,14 @@ const Profile: FC<Props> = ({ user }) => {
   const [courses, setCourses] = useState([]);
   // const {data:userReload , refetch:refetchUser } = useLoadUserQuery({});
   const userId = useSelector((state : any) => state.auth.user?._id); // Lấy userId từ Redux store
-  console.log('====================================');
-  console.log("userId", userId);
-  console.log('====================================');
+  
   const { data, isLoading, isError } = useGetCoursesByIdUserQuery(userId, {
     skip: !userId, // Bỏ qua query nếu userId chưa tồn tại
   });
 
   console.log("data" , data)
+  console.log("data" , user)
+
   
   const {} = useLogOutQuery(undefined, {
     skip: !logout ? true : false,
