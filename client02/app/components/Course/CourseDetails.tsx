@@ -78,7 +78,7 @@ const CourseDetails = ({ data, clientSecret, stripePromise, setRoute, setOpen: o
                 <Ratings rating={data.ratings} />
                 <h5 className="text-black dark:text-white">{data.reviews?.length} đánh giá</h5>
               </div>
-              <h5 className="text-black dark:text-white">{data.registeredUsers} Học Viên</h5>
+              <h5 className="text-black dark:text-white">{data.registeredUsers.length} Học Viên</h5>
             </div>
             <br />
             <h1 className="text-[25px] font-Poppins font-[600] text-black dark:text-white">

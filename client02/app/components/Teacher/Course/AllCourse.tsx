@@ -36,7 +36,7 @@ const AllCourse = () => {
         .map((item: any) => ({
           id: item._id,
           title: item.name,
-          registeredUsers: item.registeredUsers,
+          registeredUsers: item.registeredUsers.length,
           ratings: item.ratings,
           created_at: format(item.createdAt),
         }));
