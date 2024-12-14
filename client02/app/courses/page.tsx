@@ -13,7 +13,7 @@ import { useLoadUserQuery } from '@/redux/features/api/apiSilce';
 const Page: React.FC = () => {
   const searchParams = useSearchParams();
   const search = searchParams?.get('title'); // Lấy từ khóa tìm kiếm từ URL
-  const { data, isLoading } = useGetAllCoursesQuery({});
+  const { data, isLoading,refetch } = useGetAllCoursesQuery({});
   const { data: categoriesData } = useGetHeroDataQuery('Categories', {});
   const { data: levelsData } = useGetHeroDataQuery('Levels', {});
   const [courses, setCourses] = useState<any[]>([]);
@@ -22,6 +22,7 @@ const Page: React.FC = () => {
   const { data: user } = useLoadUserQuery({});
 
   useEffect(() => {
+    refetch();
     // Bắt đầu với tất cả khóa học
     let filteredCourses = data?.courses || [];
 
