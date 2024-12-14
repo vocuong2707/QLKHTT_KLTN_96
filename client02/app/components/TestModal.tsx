@@ -4,6 +4,7 @@ import { useLoadUserQuery, useSubmitTestMutation } from "../../redux/features/ap
 import { Style } from "../../app/style/styleTest"; // Import Style
 import  {incrementCount}  from "@/redux/features/auth/authSilce";
 import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 interface TestModalProps {
   open: boolean;
@@ -70,6 +71,7 @@ const TestModal: React.FC<TestModalProps> = ({
     try {
       const result = await submitTest({ answers: formattedAnswers }).unwrap();
       dispatch(incrementCount());
+      toast.success(`Bạn đã hoàn thành bài kiểm tra được:  ${result.score} điểm và bạn đạt được level: ${result.score}`);
 
       refetch();    
       setOpen(false);
