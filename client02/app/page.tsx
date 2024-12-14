@@ -34,7 +34,7 @@ const Page: FC<Props> = (props) => {
   // Kiểm tra điều kiện để hiển thị modal
   useEffect(() => {
     if (userData && userData.user) { // Kiểm tra userData.user tồn tại
-      if (userData.user.role === "User" && userData.user.isTest === false) {
+      if (userData.user.role === "User" && userData.user.isTest === false && count === 0) {
         setOpenTestModal(true);
         userData.count === 1;
         apiSlice.util.invalidateTags([{ type: "User", id: "loadUser(undefined)" }]);
