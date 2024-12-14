@@ -61,7 +61,7 @@ const CourseDetails = ({ data, clientSecret, stripePromise, setRoute, setOpen: o
   const handlePaymentSuccess = () => {
     // Reload the Page or fetch updated data after payment success
     setRegisteredUsers(true); // Mark the course as purchased
-    setOpen(false);
+    // setOpen(false);
 
   };
 
