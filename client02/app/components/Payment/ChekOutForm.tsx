@@ -29,9 +29,9 @@ const ChekOutForm = ({ setOpen, data, user,onPaymentSuccess }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [createOrder, { data: orderData, error }] = useCreateOrderMutation();
   const [addUserToCourse] = useAddUserToCourseMutation(); // Hook để thêm user vào khóa học
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    const router = useRouter();
 
     e.preventDefault();
     if (!stripe || !elements) {
