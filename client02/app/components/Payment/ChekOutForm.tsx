@@ -56,13 +56,8 @@ const ChekOutForm = ({ setOpen, data, user,onPaymentSuccess }: Props) => {
         });
 
         if (orderResponse) {
-          await addUserToCourse({ courseId: data._id, userId: user._id });
           // Thêm user vào khóa học
-          setIsLoading(true);
-
-
-          redirect(`/course-access/${data._id}`);
-
+          await addUserToCourse({ courseId: data._id, userId: user._id });
 
           // Chuyển hướng người dùng đến trang truy cập khóa học
           router.push(`/course-access/${data._id}`);
