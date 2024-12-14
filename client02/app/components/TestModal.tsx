@@ -71,7 +71,7 @@ const TestModal: React.FC<TestModalProps> = ({
     try {
       const result = await submitTest({ answers: formattedAnswers }).unwrap();
       dispatch(incrementCount());
-      toast.success(`Bạn đã hoàn thành bài kiểm tra được:  ${result.score} điểm và bạn đạt được level: ${result.score}`);
+      toast.success(`Bạn đã hoàn thành bài kiểm tra được:  ${result.score} điểm và bạn đạt được level: ${result.newLevel}`);
 
       refetch();    
       setOpen(false);
