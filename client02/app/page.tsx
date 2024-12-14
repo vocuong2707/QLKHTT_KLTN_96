@@ -39,7 +39,6 @@ const Page: FC<Props> = (props) => {
         userData.count === 1;
         apiSlice.util.invalidateTags([{ type: "User", id: "loadUser(undefined)" }]);
         refetch(); // Tải lại dữ liệu từ server
-        
       }
     }
   }, [userData, count]);
