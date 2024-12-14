@@ -8,7 +8,6 @@ import socketIO from "socket.io-client";
 import { useCreateOrderMutation } from "@/redux/features/orders/ordersApi";
 import { useAddUserToCourseMutation } from "@/redux/features/courses/coursesApi"; // Import hook mới
 import { Style } from "@/app/style/stylelogin";
-import { useRouter } from "next/router";
 
 const ENDPOINT = process.env.NEXT_PUBLIC_SOCKET_SERVER_URI || "http://localhost:8000";
 const socketId = socketIO(ENDPOINT, {
@@ -19,20 +18,17 @@ type Props = {
   setOpen: any;
   data: any;
   user: any;
-  onPaymentSuccess : ()=> any
 };
 
-const ChekOutForm = ({ setOpen, data, user,onPaymentSuccess }: Props) => {
+const ChekOutForm = ({ setOpen, data, user }: Props) => {
   const stripe = useStripe();
   const elements = useElements();
   const [message, setMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [createOrder, { data: orderData, error }] = useCreateOrderMutation();
   const [addUserToCourse] = useAddUserToCourseMutation(); // Hook để thêm user vào khóa học
-  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-
     e.preventDefault();
     if (!stripe || !elements) {
       return;
@@ -44,7 +40,7 @@ const ChekOutForm = ({ setOpen, data, user,onPaymentSuccess }: Props) => {
       elements,
       redirect: "if_required",
     });
-    
+
     if (error) {
       setMessage(error.message || "An unexpected error occurred.");
       setIsLoading(false);
@@ -55,17 +51,11 @@ const ChekOutForm = ({ setOpen, data, user,onPaymentSuccess }: Props) => {
           payment_info: paymentIntent,
         });
 
-        if (orderResponse) {
+        if ("data" in orderResponse) {
           // Thêm user vào khóa học
           await addUserToCourse({ courseId: data._id, userId: user._id });
-
-          // Chuyển hướng người dùng đến trang truy cập khóa học
-          router.push(`/course-access/${data._id}`);
-      
-          // Hiển thị thông báo thành công
           toast.success("Payment successful! Access granted to the course.");
-          
-         
+          redirect(`/course-access/${data._id}`);
         }
       } catch (error) {
         console.error("Error adding user to course:", error);
