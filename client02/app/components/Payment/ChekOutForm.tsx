@@ -18,9 +18,10 @@ type Props = {
   setOpen: any;
   data: any;
   user: any;
+  onPaymentSuccess: ()=>void
 };
 
-const ChekOutForm = ({ setOpen, data, user }: Props) => {
+const ChekOutForm = ({ setOpen, data, user,onPaymentSuccess }: Props) => {
   const stripe = useStripe();
   const elements = useElements();
   const [message, setMessage] = useState<string | null>(null);
