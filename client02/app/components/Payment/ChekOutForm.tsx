@@ -8,6 +8,7 @@ import socketIO from "socket.io-client";
 import { useCreateOrderMutation } from "@/redux/features/orders/ordersApi";
 import { useAddUserToCourseMutation } from "@/redux/features/courses/coursesApi"; // Import hook mới
 import { Style } from "@/app/style/stylelogin";
+import { useRouter } from "next/router";
 
 const ENDPOINT = process.env.NEXT_PUBLIC_SOCKET_SERVER_URI || "http://localhost:8000";
 const socketId = socketIO(ENDPOINT, {
@@ -30,6 +31,8 @@ const ChekOutForm = ({ setOpen, data, user,onPaymentSuccess }: Props) => {
   const [addUserToCourse] = useAddUserToCourseMutation(); // Hook để thêm user vào khóa học
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const router = useRouter();
+
     e.preventDefault();
     if (!stripe || !elements) {
       return;
@@ -41,7 +44,7 @@ const ChekOutForm = ({ setOpen, data, user,onPaymentSuccess }: Props) => {
       elements,
       redirect: "if_required",
     });
-
+    
     if (error) {
       setMessage(error.message || "An unexpected error occurred.");
       setIsLoading(false);
@@ -55,8 +58,13 @@ const ChekOutForm = ({ setOpen, data, user,onPaymentSuccess }: Props) => {
         if (orderResponse) {
           // Thêm user vào khóa học
           await addUserToCourse({ courseId: data._id, userId: user._id });
+
+          // Chuyển hướng người dùng đến trang truy cập khóa học
+          router.push(`/course-access/${data._id}`);
+      
+          // Hiển thị thông báo thành công
           toast.success("Payment successful! Access granted to the course.");
-          redirect(`/course-access/${data._id}`);
+          
          
         }
       } catch (error) {
