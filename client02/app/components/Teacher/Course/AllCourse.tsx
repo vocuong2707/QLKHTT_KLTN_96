@@ -162,7 +162,7 @@ const AllCourse = () => {
       },
     },
     "& .MuiDataGrid-cell": {
-      color: "green", // Font chữ màu đỏ cho toàn bộ ô trong bảng
+      color: "white", // Font chữ màu đỏ cho toàn bộ ô trong bảng
     },
   }}
 />

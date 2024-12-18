@@ -162,7 +162,7 @@ const AllUsers: FC = () => {
                     : "1px solid rgba(0, 0, 0, 0.1)",
               },
               "& .MuiDataGrid-cell": {
-                color: theme === "dark" ? "#fff" : "#000",
+                color: theme === "red" ? "#fff" : "red",
                 padding: "10px",
               },
               "& .MuiDataGrid-footerContainer": {

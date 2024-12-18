@@ -256,7 +256,7 @@ const Sidebar = () => {
               {!isCollapsed && "Content"}
             </Typography>
             <Item
-              title="Live Courses"
+              title="Manager Courses"
               to="/admin/courses"
               icon={<OndemandVideoIcon className="w-5 h-5" />}
               selected={selected}
