@@ -181,7 +181,7 @@ const TeacherSidebar = () => {
             className="space-y-2"
           >
             <Item
-              title="Live Courses"
+              title="Manage Courses"
               to="/teacher/courses"
               icon={<OndemandVideoIcon className="w-5 h-5" />}
               selected={selected}

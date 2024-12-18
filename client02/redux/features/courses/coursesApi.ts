@@ -12,7 +12,7 @@ export const courseApi = apiSlice.injectEndpoints({
     }),
     getAllCourses: builder.query({
       query: () => ({  // Truyền trực tiếp data thay vì { data }
-        url: "get-admin-courses",
+        url: "get-courses",
         method: "GET",
         credentials: "include" as const,
       }),

@@ -13,6 +13,7 @@ import { useLoadUserQuery } from "@/redux/features/api/apiSilce";
 import Image from "next/image";
 import Avatar02 from "../../../public/asstes/avatar2.jpg";
 import { VscVerifiedFilled } from "react-icons/vsc";
+import { redirect } from "next/navigation";
 
 type Props = {
   data: any;
@@ -61,6 +62,8 @@ const CourseDetails = ({ data, clientSecret, stripePromise, setRoute, setOpen: o
   const handlePaymentSuccess = () => {
     // Reload the Page or fetch updated data after payment success
     setRegisteredUsers(true); // Mark the course as purchased
+   setOpen(false);
+   window.location.reload();
    
   };
 

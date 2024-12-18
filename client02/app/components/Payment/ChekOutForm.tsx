@@ -56,7 +56,9 @@ const ChekOutForm = ({ setOpen, data, user,onPaymentSuccess }: Props) => {
           // Thêm user vào khóa học
           await addUserToCourse({ courseId: data._id, userId: user._id });
           toast.success("Payment successful! Access granted to the course.");
-          redirect(`/course-access/${data._id}`);
+          window.location.replace(`/course-access/${data._id}`);
+          onPaymentSuccess();
+
         }
       } catch (error) {
         console.error("Error adding user to course:", error);
