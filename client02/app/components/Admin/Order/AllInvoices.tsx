@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import { useTheme } from "next-themes";
 import { format } from "timeago.js";
 import { useGetAllOrdersQuery } from "@/redux/features/orders/ordersApi";
-import { useGetAllUsersQuery } from "@/redux/features/user/userApi";
+import { useGetAllUsersAdminQuery } from "@/redux/features/user/userApi";
 import { useGetAllCoursesQuery } from "@/redux/features/courses/coursesApi";
 import { AiOutlineMail } from "react-icons/ai"; // Import the mail icon
 import Loader from "../../Loader/Loader";
@@ -16,7 +16,7 @@ type Props = {
 const AllInvoices = ({ isDashboard }: Props) => {
   const { theme, setTheme } = useTheme();
   const { isLoading, data } = useGetAllOrdersQuery({});
-  const { data: usersData } = useGetAllUsersQuery({});
+  const { data: usersData } = useGetAllUsersAdminQuery({});
   const { data: coursesData } = useGetAllCoursesQuery({});
 
   const [orderData, setOrderdata] = useState<any>([]);
@@ -27,9 +27,13 @@ const AllInvoices = ({ isDashboard }: Props) => {
         const user = usersData?.users.find(
           (user: any) => user._id === item.userId // Fixed comparison operator
         );
+        
         const course = coursesData?.courses.find(
-          (course: any) => course._id === item.courseId // Fixed variable name and comparison
+          (course: any) => course._id === item.courseId
+          
         );
+        console.log("course: " , course);
+
         return {
           ...item,
           userName: user?.name,
@@ -43,7 +47,6 @@ const AllInvoices = ({ isDashboard }: Props) => {
   }, [data, usersData, coursesData]); // Fixed variable name for usersData and coursesData
 
   const columns: any = [
-    { field: "id", headerName: "ID", flex: 0.3 },
     {
       field: "userName",
       headerName: "Name",
@@ -54,6 +57,7 @@ const AllInvoices = ({ isDashboard }: Props) => {
       : [
           { field: "userEmail", headerName: "Email", flex: 1 },
           { field: "title", headerName: "Course Title", flex: 1 },
+          { field: "created_at", headerName: "Created At", flex: 0.5 }
         ]),
     { field: "price", headerName: "Price", flex: 0.5 },
     ...(isDashboard
